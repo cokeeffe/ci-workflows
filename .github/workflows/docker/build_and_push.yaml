@@ -39,7 +39,7 @@ jobs:
     - name: Login to registry
       uses: .github/actions/docker/registry/
       with:
-        image: ${{ inputs.registry }}
+        registry: ${{ inputs.registry }}
 
     - name: Set image tags
       id: meta
