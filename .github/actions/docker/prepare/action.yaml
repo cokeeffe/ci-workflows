@@ -3,6 +3,9 @@ runs:
   steps:
     - name: Checkout code
       uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        token: ${{ secrets.READ_REPOS }}
 
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v3
