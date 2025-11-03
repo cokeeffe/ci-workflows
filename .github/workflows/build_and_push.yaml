@@ -40,6 +40,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        token: ${{ secrets.READ_REPOS }}
+
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v3
 
@@ -86,10 +92,8 @@ jobs:
       with:
         push: true
         platforms: ${{ inputs.platforms }}
-        context: "{{defaultContext}}:${{ inputs.context }}"
-        file: ${{ inputs.docker_file }}
+        context: ${{ github.workspace }}/${{ inputs.context }}
+        file: ${{ github.workspace }}/${{ inputs.context }}/${{ inputs.docker_file }}
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
         outputs: type=image,push-by-digest=true,name-canonical=true,push=true
-        secrets: |
-          GIT_AUTH_TOKEN=${{ secrets.READ_REPOS }}
