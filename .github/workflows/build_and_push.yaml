@@ -92,7 +92,7 @@ jobs:
       with:
         push: true
         platforms: ${{ inputs.platforms }}
-        context: ${{ github.workspace }}/${{ inputs.context }}
+        context: {{defaultContext}}:${{ inputs.context }}
         file: ${{ inputs.docker_file }}
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
