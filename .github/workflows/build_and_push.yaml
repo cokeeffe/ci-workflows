@@ -88,7 +88,7 @@ jobs:
 
     - name: Show dir
       run: |
-        ls $PWD/pubky-core
+        echo ${{ github.workspace }}
 
     - name: Build and push image
       id: build
@@ -96,7 +96,7 @@ jobs:
       with:
         push: true
         platforms: ${{ inputs.platforms }}
-        context: ${{ inputs.context }}
+        context: ${{ github.workspace }}/${{ inputs.context }}
         file: ${{ inputs.docker_file }}
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
