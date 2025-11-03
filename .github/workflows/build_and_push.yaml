@@ -3,7 +3,7 @@ name: Build and Push Multi-arch Docker Image
 on:
   workflow_call:
     inputs:
-      registy:
+      registry:
         required: true
         type: string
       image:
