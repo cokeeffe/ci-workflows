@@ -1,3 +1,9 @@
+inputs:
+  token:
+    description: 'Github token to use'
+    required: false
+    default: ${{ secrets.GITHUB_TOKEN }}
+
 runs:
   using: "composite"
   steps:
@@ -5,7 +11,7 @@ runs:
       uses: actions/checkout@v4
       with:
         submodules: recursive
-        token: ${{ secrets.READ_REPOS }}
+        token: ${{ inputs.token }}
 
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v3
