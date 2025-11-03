@@ -91,5 +91,5 @@ jobs:
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
         outputs: type=image,push-by-digest=true,name-canonical=true,push=true
-        secrets:
+        secrets: |
           GIT_AUTH_TOKEN=${{ secrets.READ_REPOS }}
