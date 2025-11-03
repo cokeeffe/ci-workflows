@@ -47,10 +47,10 @@ jobs:
         token: ${{ secrets.READ_REPOS }}
 
     - name: Prepare env
-      uses: pubky-app/ci-workflows/.github/actions/docker/prepare@main
+      uses: pubky/ci-workflows/.github/actions/docker/prepare@main
 
     - name: Login to registry
-      uses: pubky-app/ci-workflows/.github/actions/docker/registry@main
+      uses: pubky/ci-workflows/.github/actions/docker/registry@main
       with:
         registry: ${{ inputs.registry }}
 
