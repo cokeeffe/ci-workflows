@@ -40,12 +40,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      with:
-        submodules: recursive
-        token: ${{ secrets.READ_REPOS }}
-
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v3
 
@@ -97,3 +91,5 @@ jobs:
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
         outputs: type=image,push-by-digest=true,name-canonical=true,push=true
+        secrets:
+          GIT_AUTH_TOKEN=${{ secrets.READ_REPOS }}
