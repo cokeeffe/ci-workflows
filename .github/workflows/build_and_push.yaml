@@ -27,6 +27,7 @@ on:
         default: ''
       context:
         required: false
+        type: string
         default: '.'
       docker_file:
         required: false
