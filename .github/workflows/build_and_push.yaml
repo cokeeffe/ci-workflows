@@ -41,10 +41,10 @@ jobs:
 
     steps:
     - name: Checkout code and prepare env
-      uses: .github/actions/docker/prepare/
+      uses: ./.github/actions/docker/prepare/
 
     - name: Login to registry
-      uses: .github/actions/docker/registry/
+      uses: ./.github/actions/docker/registry/
       with:
         registry: ${{ inputs.registry }}
 
