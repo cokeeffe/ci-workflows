@@ -24,6 +24,7 @@ on:
           linux/amd64
       build_args:
         required: false
+        type: string
         default: ''
       context:
         required: false
