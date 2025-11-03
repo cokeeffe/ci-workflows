@@ -40,7 +40,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code and prepare env
+    - name: Prepare env
       uses: ./.github/actions/docker/prepare/
 
     - name: Login to registry
