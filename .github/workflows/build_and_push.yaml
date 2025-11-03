@@ -96,4 +96,3 @@ jobs:
         file: ${{ github.workspace }}/${{ inputs.context }}/${{ inputs.docker_file }}
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
-        outputs: type=image,push-by-digest=true,name-canonical=true,push=true
