@@ -40,6 +40,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        token: ${{ secrets.READ_REPOS }}
+
     - name: Prepare env
       uses: ./.github/actions/docker/prepare/
 
