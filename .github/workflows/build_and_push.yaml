@@ -40,7 +40,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        platform: inputs.platforms
+        platform: ${{ inputs.platforms }}
 
     steps:
     - name: Checkout repository
