@@ -9,10 +9,10 @@ on:
       image:
         required: true
         type: string
-      tag:
+      tags:
         required: false
         type: string
-        default: ${{ github.sha }}
+        default: ''
       latest:
         required: false
         type: boolean
@@ -42,6 +42,10 @@ on:
         required: false
         type: string
         default: '["ubuntu-latest"]'
+      sha_tag:
+        required: false
+        type: boolean
+        default: true
 
 jobs:
   build-and-push:
@@ -70,6 +74,13 @@ jobs:
             echo "type=dockerhub" >> $GITHUB_OUTPUT
         fi
 
+    - name: Get git sha tag for docker image
+      id: sha_tag
+      run: |
+        cd ${{ inputs.context }}
+        echo "value=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+      if: ${{ inputs.sha_tag }}
+
     - name: Login to GCR
       uses: docker/login-action@v3
       with:
@@ -93,7 +104,8 @@ jobs:
           ${{ inputs.registry }}/${{ inputs.image }}
         tags: |
           type=raw,value=latest,enable=${{ inputs.latest }}
-          type=raw,value=${{ inputs.tag }}
+          type=raw,value=${{ steps.sha_tag.value }},enable=${{ inputs.sha_tag }}
+          ${{ inputs.tags }}
 
     - name: Build and push image
       id: build
