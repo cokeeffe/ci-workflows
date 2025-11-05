@@ -100,6 +100,7 @@ jobs:
         context: ${{ github.workspace }}/${{ inputs.context }}
         file: ${{ github.workspace }}/${{ inputs.context }}/${{ inputs.docker_file }}
         tags: ${{ steps.meta.outputs.tags }}
+        build-args: ${{ inputs.build_args }}
         labels: ${{ steps.meta.outputs.labels }}
         cache-from: type=registry,ref=${{ inputs.registry }}/${{ inputs.image }}:cache
         cache-to: type=registry,ref=${{ inputs.registry }}/${{ inputs.image }}:cache,mode=max
