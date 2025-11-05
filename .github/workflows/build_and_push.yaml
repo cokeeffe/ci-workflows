@@ -38,10 +38,14 @@ on:
         required: false
         type: boolean
         default: false
+      runs_on:
+        required: false
+        type: string
+        default: "ubuntu-latest"
 
 jobs:
   build-and-push:
-    runs-on: ubuntu-latest
+    runs-on: ${{ inputs.runs_on }}
 
     steps:
     - name: Checkout repository
