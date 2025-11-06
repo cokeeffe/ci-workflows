@@ -53,11 +53,11 @@ on:
       cache_from:
         required: false
         type: string
-        default: "type=registry,ref=${{ inputs.registry }}/${{ inputs.image }}:cache"
+        default: ""
       cache_to:
         required: false
         type: string
-        default: "type=registry,ref=${{ inputs.registry }}/${{ inputs.image }}:cache,mode=max"
+        default: ""
 
     secrets:
       read_repo_token:
@@ -103,6 +103,23 @@ jobs:
         echo "value=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
       if: ${{ inputs.sha_tag }}
 
+    - name: Set cache values
+      id: cache
+      run: |
+        CACHE_FROM="${{ inputs.cache_from }}"
+        CACHE_TO="${{ inputs.cache_to }}"
+
+        if [ -z "$CACHE_FROM" ]; then
+          CACHE_FROM="type=registry,ref=${{ inputs.registry }}/${{ inputs.image }}:cache"
+        fi
+
+        if [ -z "$CACHE_TO" ]; then
+          CACHE_TO="type=registry,ref=${{ inputs.registry }}/${{ inputs.image }}:cache,mode=max"
+        fi
+
+        echo "from=$CACHE_FROM" >> $GITHUB_OUTPUT
+        echo "to=$CACHE_TO" >> $GITHUB_OUTPUT
+
     - name: Login to GCR
       uses: docker/login-action@v3
       with:
@@ -140,5 +157,5 @@ jobs:
         tags: ${{ steps.meta.outputs.tags }}
         build-args: ${{ inputs.build_args }}
         labels: ${{ steps.meta.outputs.labels }}
-        cache-from: ${{ inputs.cache_from }}
-        cache-to: ${{ inputs.cache_to }}
+        cache-from: ${{ steps.cache.outputs.from }}
+        cache-to: ${{ steps.cache.outputs.to }}
