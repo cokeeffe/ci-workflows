@@ -1,0 +1,29 @@
+name: "Login to registry"
+description: "Login to registry depending on registry type"
+
+inputs:
+  registry:
+    type: string
+    required: true
+  image:
+    required: true
+    type: string
+  tag:
+    required: false
+    type: string
+
+outputs:
+  image-exists:
+    value: ${{ steps.check_image.outputs.exits }}
+
+runs:
+  using: "composite"
+  steps:
+    - id: check_image
+      run: |
+        if docker manifest inspect ${{ inputs.registry }}/${{ inputs.image }}; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+        else
+            echo "exists=false" >> $GITHUB_OUTPUT
+        fi
+      shell: bash
