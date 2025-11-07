@@ -20,6 +20,7 @@ runs:
   steps:
     - name: Set registry type
       id: registry
+      shell: bash
       run: |
         if [[ ${{ inputs.registry }} =~ ^.*-docker.pkg.dev.*$  ]]; then
             echo "type=gcp" >> $GITHUB_OUTPUT
