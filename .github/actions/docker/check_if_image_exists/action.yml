@@ -11,6 +11,10 @@ inputs:
   tag:
     required: false
     type: string
+  arch:
+    required: false
+    type: string
+    default: "linux/amd64"
 
 outputs:
   image-exists:
@@ -21,7 +25,7 @@ runs:
   steps:
     - id: check_image
       run: |
-        if docker manifest inspect ${{ inputs.registry }}/${{ inputs.image }}; then
+        if docker manifest inspect ${{ inputs.registry }}/${{ inputs.image }} | jq '.manifests[].platform | [.os, .architecture] | join("/")' | grep -i "${{ inputs.arch }}"; then
             echo "exists=true" >> $GITHUB_OUTPUT
         else
             echo "exists=false" >> $GITHUB_OUTPUT
