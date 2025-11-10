@@ -22,7 +22,7 @@ runs:
   steps:
     - id: check_image
       run: |
-        if docker manifest inspect ${{ inputs.image }} | jq '.manifests[].platform | [.os, .architecture] | join("/")' | grep -i "${{ inputs.arch }}"; then
+        if docker manifest inspect ${{ inputs.image }} | jq '.manifests[].platform | [.os, .architecture] | join("/")' | grep -qi "${{ inputs.arch }}"; then
             echo "exists=true" >> $GITHUB_OUTPUT
         else
             echo "exists=false" >> $GITHUB_OUTPUT
