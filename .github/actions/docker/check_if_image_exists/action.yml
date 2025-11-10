@@ -1,5 +1,5 @@
-name: "Login to registry"
-description: "Login to registry depending on registry type"
+name: "Check if image persists in registry"
+description: "Check if image persists in registry"
 
 inputs:
   image:
@@ -14,7 +14,7 @@ inputs:
     default: "linux/amd64"
 
 outputs:
-  image-exists:
+  exists:
     value: ${{ steps.check_image.outputs.exits }}
 
 runs:
