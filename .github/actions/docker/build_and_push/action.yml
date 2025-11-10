@@ -1,60 +1,59 @@
 name: Build and Push Multi-arch Docker Image
 
-on:
-  inputs:
-    registry:
-      required: true
-      type: string
-    image:
-      required: true
-      type: string
-    tags:
-      required: false
-      type: string
-      default: ''
-    latest:
-      required: false
-      type: boolean
-      default: false
-    platforms:
-      required: false
-      type: string
-      default: |
-        linux/amd64
-    build_args:
-      required: false
-      type: string
-      default: ''
-    context:
-      required: false
-      type: string
-      default: '.'
-    docker_file:
-      required: false
-      type: string
-      default: 'Dockerfile'
-    sha_tag:
-      required: false
-      type: boolean
-      default: true
-    push:
-      required: false
-      type: boolean
-      default: true
-    cache_from:
-      required: false
-      type: string
-      default: ""
-    cache_to:
-      required: false
-      type: string
-      default: ""
-    gcp_service_account_key:
-      required: false
-    docker_registy_login:
-      required: false
-    docker_registy_password:
-      required: false
+inputs:
+  registry:
+    required: true
+    type: string
+  image:
+    required: true
+    type: string
+  tags:
+    required: false
+    type: string
+    default: ''
+  latest:
+    required: false
+    type: boolean
+    default: false
+  platforms:
+    required: false
+    type: string
+    default: |
+      linux/amd64
+  build_args:
+    required: false
+    type: string
+    default: ''
+  context:
+    required: false
+    type: string
+    default: '.'
+  docker_file:
+    required: false
+    type: string
+    default: 'Dockerfile'
+  sha_tag:
+    required: false
+    type: boolean
+    default: true
+  push:
+    required: false
+    type: boolean
+    default: true
+  cache_from:
+    required: false
+    type: string
+    default: ""
+  cache_to:
+    required: false
+    type: string
+    default: ""
+  gcp_service_account_key:
+    required: false
+  docker_registy_login:
+    required: false
+  docker_registy_password:
+    required: false
 
 runs:
   using: "composite"
