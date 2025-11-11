@@ -1,0 +1,20 @@
+name: "Get HEAD commit hash"
+description: "Get HEAD commit hash"
+
+inputs:
+  path:
+    required: true
+    type: string
+
+outputs:
+  hash:
+    value: ${{ steps.get_hash.outputs.value }}
+
+runs:
+  using: "composite"
+  steps:
+    - id: get_hash
+      run: |
+        cd ${{ inputs.path }}
+        echo "value=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+      shell: bash
