@@ -98,7 +98,7 @@ runs:
         ${{ inputs.registry }}/${{ inputs.image }}
       tags: |
         type=raw,value=latest,enable=${{ inputs.latest }}
-        type=raw,value=${{ steps.sha_tag.outputs.value }},enable=${{ inputs.sha_tag }}
+        type=raw,value=${{ steps.sha_tag.outputs.hash }},enable=${{ inputs.sha_tag }}
         ${{ inputs.tags }}
 
   - name: Build and push image
