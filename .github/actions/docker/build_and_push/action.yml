@@ -162,6 +162,6 @@ runs:
         echo '```' >> $GITHUB_STEP_SUMMARY
       else
         echo "❌ **Cosign Signature Verification Failed**" >> $GITHUB_STEP_SUMMARY
-        echo "Verification failed for: $IMAGE_DIGEST" >> $GITHUB_STEP_SUMMARY
+        echo "Verification failed for: $DIGEST" >> $GITHUB_STEP_SUMMARY
         exit 1
       fi
